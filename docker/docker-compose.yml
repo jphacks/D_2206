@@ -1,0 +1,17 @@
+version: "3"
+services:
+
+  server:
+    build: ./server/
+    ports:
+      - "5001:5000"
+    volumes:
+      - ../app/server:/usr/src/app/server
+    command: flask run --host=0.0.0.0
+
+  flont:
+    build: ./flont/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../app/server:/usr/src/app/flont
