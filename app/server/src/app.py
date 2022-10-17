@@ -20,4 +20,4 @@ def newsExtraction(URL):
     html_sub = re.sub(pattern, "", str(html))
     # print(str(html))
     # print(html_sub)
-    return html_sub
+    return str(html_sub[1:-1])
