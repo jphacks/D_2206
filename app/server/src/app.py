@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from flask import jsonify
 
 app = Flask(__name__)
 CORS(app)
@@ -13,4 +14,8 @@ def after_request(response):
 
 @app.route("/", methods=['GET'])
 def index():
-    return "Hello flask"
+    list = [
+            {'str': "aaaa", 'color': "yellow"},
+            {'str': "baaaaka", 'color': "red"}
+            ]
+    return jsonify(results = list)
