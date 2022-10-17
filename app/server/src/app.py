@@ -19,10 +19,10 @@ def newsExtraction(URL):
     html = bun_page.find_all("div",class_="article_body")
     k = html[0].find_all("p",class_="sc-kaNhvL")
     if len(k) != 0:
-    kill_html = str(html[0]).replace(str(k[0]),"")
+        kill_html = str(html[0]).replace(str(k[0]),"")
     else:
-    kill_html = str(html[0])
-    html_sub = re.sub(pattern, "", kill_html)
+        kill_html = str(html[0])
+        html_sub = re.sub(pattern, "", kill_html)
     # print(str(html))
     # print(html_sub)
     return html_sub
