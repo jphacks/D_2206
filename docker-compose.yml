@@ -6,7 +6,7 @@ services:
       - "5000:5000"
     volumes:
       - ./app/server/src:/usr/src/app/
-    command: flask run --host=0.0.0.0
+    command: flask run --reload --host=0.0.0.0
 
   front:
     build: ./app/front/

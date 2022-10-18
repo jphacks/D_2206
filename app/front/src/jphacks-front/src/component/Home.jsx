@@ -10,8 +10,11 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData(e.target);
+    const url = data.get("url");
 
     const res = await newsApi.test();
+    const res_1 = await newsApi.test_2({ url });
     console.log(res.results);
     console.log(res.results[0]);
     console.log(res.results[1]);
@@ -23,6 +26,7 @@ const Home = () => {
   return (
     <>
       <Container component="main">
+        <h1> 曖昧警察だ！！！！</h1>
         <Box component="form" onSubmit={handleSubmit} maxWidth="1000">
           <TextField sx={{ mt: 7, width: 1150 }} id="url" label="URL" name="url" value={url} onChange={(e) => setUrl(e.target.value)} required />
           <Box sx={{ mt: 3, display: "flex", justifyContent: "space-between" }}>
@@ -43,7 +47,7 @@ const Home = () => {
           <Box sx={{ mt: 5, border: 1 }}>
             <p>
               {results.map((item) => {
-                return <span>{item.str}</span>;
+                return <span style={{ color: item.color }}>{item.text}</span>;
               })}
             </p>
           </Box>

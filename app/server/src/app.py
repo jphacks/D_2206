@@ -1,29 +1,37 @@
 from flask import Flask
 from flask_cors import CORS
-from flask import jsonify
+from flask import request,jsonify
 import requests
 from bs4 import BeautifulSoup
 import time
 import re
 
 app = Flask(__name__)
-CORS(app)
-
-@app.after_request
-def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
+CORS(app,
+    supports_credentials=True)
 
 @app.route("/", methods=['GET'])
 def index():
+    print("test1")
     list = [
-            {'str': "aaaa", 'color': "yellow"},
-            {'str': "baaaaka", 'color': "red"}
+            {'text': "aaaa", 'color': "#eac645"},
+            {'text': "baaaaka", 'color': "#ed4134"}
             ]
     return jsonify(results = list)
 
+
+
+@app.route("/test", methods=['POST'])
+def test():
+    print("test2")
+    list = [
+            {'text': "aaaa", 'color': "#eac645"},
+            {'text': "baaaaka", 'color': "#ed4134"}
+    ]
+
+    url = request.json['url']
+    print(url)
+    return jsonify(results = list)
 
 def newsExtraction(URL):
     pattern = "<[^>]+>"
