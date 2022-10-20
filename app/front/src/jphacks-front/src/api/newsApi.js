@@ -2,7 +2,7 @@ import axios from "./axios";
 
 const newsApi = {
   test: () => axios.get("/"),
-  test_2: (params) => axios.post("/test", params),
+  entryURL: (params) => axios.post("/entryURL", params),
 };
 
 export default newsApi;

@@ -5,10 +5,11 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
-from bertClassfier import BertClassifier
+#from bertClassfier import BertClassifier
 
 import numpy as np
 import pandas as pd
+import MeCab
 # import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -33,18 +34,18 @@ from transformers import AutoTokenizer
 app = Flask(__name__)
 CORS(app,
     supports_credentials=True)
-classifier = BertClassifier()
-model_path = './model.pth'
-classifier.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+#classifier = BertClassifier()
+#model_path = './model.pth'
+#classifier.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 
 # 文章に形容詞か形状詞があれば意見とする
 def ruleBaseFactCheck(sentence):
     mecabTagger = MeCab.Tagger("mecabrc")
-    node = mecabTagger.parseToNode(text)
+    node = mecabTagger.parseToNode(sentence)
     hcount = {}
     isOpinion = False
     while node:
-        nshi = node.feature.split(",")[0]
+        hinshi = node.feature.split(",")[0]
         if hinshi == "形状詞" or hinshi == "形容詞":
             isTrue = True
             break
@@ -109,7 +110,10 @@ def newsExtraction():
     # print(str(html))
     # print(html_sub)
     result = isFactOrOpinion(html_sub)
-    return jsonify(results = list)
+    print(result)
+    print(type(result))
+    return jsonify(results = result)
+
 
 
 @app.route("/", methods=['GET'])
