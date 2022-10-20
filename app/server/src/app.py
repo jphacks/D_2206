@@ -10,7 +10,39 @@ app = Flask(__name__)
 def index():
     return "Hello aaa"
 
+# 文章に形容詞か形状詞があれば意見とする
+def ruleBaseFactCheck(str(sentence)):
+    mecabTagger = MeCab.Tagger("mecabrc")
+    node = mecabTagger.parseToNode(text)
+    hcount = {}
+    isOpinion = False
+    while node:
+        nshi = node.feature.split(",")[0]
+        if hinshi == "形状詞" or hinshi == "形容詞":
+            isTrue = True
+            break
+        node = node.next
+    if isOpinion:
+        return "#ff6347"#意見の場合 トマト色
+    else :
+        return "#f0e68c"#事実の場合 黄色
 
+
+# ニュースを文章ごとに事実か意見か分ける
+def isFackOrOpinion(str(text)):
+    ret = []
+    sentence_list = text.split("。")
+    for sentence in sentence_list:
+        result = ruleBaseFactCheck(sentence)
+        ans = {}
+        ans["text"] = sentence
+        ans["color"] = result
+        ret.append(ans)
+    return ret
+
+
+# URLからニュース記事をスクレイプ
+# 今はYahooにのみ対応
 def newsExtraction(URL):
     pattern = "<[^>]+>"
 
@@ -25,4 +57,4 @@ def newsExtraction(URL):
         html_sub = re.sub(pattern, "", kill_html)
     # print(str(html))
     # print(html_sub)
-    return html_sub
+    return isFackOrOpinion(html_sub)
