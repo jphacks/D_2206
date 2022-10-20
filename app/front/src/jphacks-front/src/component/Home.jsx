@@ -14,7 +14,7 @@ const Home = () => {
     const url = data.get("url");
 
     const res = await newsApi.test();
-    const res_1 = await newsApi.test_2({ url });
+    const res_1 = await newsApi.entryURL({ url });
     console.log(res.results);
     console.log(res.results[0]);
     console.log(res.results[1]);
