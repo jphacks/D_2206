@@ -20,18 +20,31 @@ def index():
     return jsonify(results = list)
 
 
+@app.route("/tfDetect", methods=['POST'])
+def tfDetect():
 
-@app.route("/test", methods=['POST'])
-def test():
-    print("test2")
-    list = [
-            {'text': "aaaa", 'color': "#eac645"},
-            {'text': "baaaaka", 'color': "#ed4134"}
-    ]
-
+    print("tfDetect")
     url = request.json['url']
     print(url)
+
+    news_text = newsExtraction(url) #URL内のtextを抽出する
+    texts = splitCiercle(news_text)#全文をlist型に「。」区切りで分割をする
+
+    results = []
+    for text in texts:
+        ml_result = {}
+        text = text + "。"
+        #学習モデルにtextを読み込ませる
+        ml_result['text'] = text
+        if tof == '1':
+            ml_result['color'] = "#eac645"
+        else :
+            ml_result['color'] = "#ed4134"
+        results.append(ml_result)
+
     return jsonify(results = list)
+
+
 
 def newsExtraction(URL):
     pattern = "<[^>]+>"
@@ -48,3 +61,7 @@ def newsExtraction(URL):
     # print(str(html))
     # print(html_sub)
     return html_sub
+
+#「。」区切りで文章を分割するメソッド
+def splitCiercle(texts):
+    return texts.split("。")
