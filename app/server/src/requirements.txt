@@ -3,3 +3,4 @@ requests
 beautifulsoup4
 mecab-python3
 unidic-lite
+flask-cors

@@ -1,14 +1,23 @@
 from flask import Flask
+from flask_cors import CORS
+from flask import request,jsonify
 import requests
 from bs4 import BeautifulSoup
 import time
 import re
 
 app = Flask(__name__)
+CORS(app,
+    supports_credentials=True)
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def index():
-    return "Hello aaa"
+    print("test1")
+    list = [
+            {'text': "aaaa", 'color': "#eac645"},
+            {'text': "baaaaka", 'color': "#ed4134"}
+            ]
+    return jsonify(results = list)
 
 # 文章に形容詞か形状詞があれば意見とする
 def ruleBaseFactCheck(str(sentence)):
@@ -43,6 +52,20 @@ def isFackOrOpinion(str(text)):
 
 # URLからニュース記事をスクレイプ
 # 今はYahooにのみ対応
+
+@app.route("/test", methods=['POST'])
+def test():
+    print("test2")
+    list = [
+            {'text': "aaaa", 'color': "#eac645"},
+            {'text': "baaaaka", 'color': "#ed4134"}
+    ]
+
+    url = request.json['url']
+    print(url)
+    return jsonify(results = list)
+
+
 def newsExtraction(URL):
     pattern = "<[^>]+>"
 
