@@ -29,12 +29,12 @@ const Home = () => {
       <Container component="main">
         <h1> 曖昧警察だ！！！！</h1>
         <Box component="form" onSubmit={handleSubmit} maxWidth="1000">
-          <TextField sx={{ mt: 7, width: 1150 }} id="url" label="URL" name="url" value={url} onChange={(e) => setUrl(e.target.value)} disabled={loading} required />
+          <TextField sx={{ mt: 7, width: 1150, backgroundColor: "white" }} id="url" label="URL" name="url" value={url} onChange={(e) => setUrl(e.target.value)} disabled={loading} required />
           <Box sx={{ mt: 3, display: "flex", justifyContent: "space-between" }}>
-            <LoadingButton sx={{ width: 200 }} type="submit" loading={loading} variant="outlined">
+            <LoadingButton sx={{ width: 200, backgroundColor: "white" }} type="submit" loading={loading} variant="outlined">
               みる！！
             </LoadingButton>
-            <LoadingButton sx={{ width: 200 }} onClick={() => setUrl("")} loading={loading} variant="outlined">
+            <LoadingButton sx={{ width: 200, backgroundColor: "white" }} onClick={() => setUrl("")} loading={loading} variant="outlined">
               clear
             </LoadingButton>
           </Box>
