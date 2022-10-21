@@ -1,0 +1,14 @@
+flask==2.0.1
+requests
+beautifulsoup4
+mecab-python3==0.996.6rc2
+unidic-lite
+flask-cors
+transformers[ja]
+torch
+transformers
+fugashi
+ipadic
+torchtext==0.9.1
+pandas
+scikit-learn

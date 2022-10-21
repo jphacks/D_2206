@@ -1,0 +1,17 @@
+version: "3"
+services:
+  server:
+    build: ./app/server/
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app/server/src:/usr/src/app/
+    command: flask run --reload --host=0.0.0.0
+
+  front:
+    build: ./app/front/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app/front/src/jphacks-front:/usr/src/app/
+    command: sh -c "npm run start"
