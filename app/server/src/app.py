@@ -36,15 +36,19 @@ CORS(app,
 classifier = BertClassifier()
 model_path = './model.pth'
 classifier.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+MAX_LENGTH = 512
+tokenizer = AutoTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+device = torch.device("cpu")
+
 
 # 文章に形容詞か形状詞があれば意見とする
-def ruleBaseFactCheck(sentence):
+def ruleBaseFactCheck(text):
     mecabTagger = MeCab.Tagger("mecabrc")
     node = mecabTagger.parseToNode(text)
     hcount = {}
     isOpinion = False
     while node:
-        nshi = node.feature.split(",")[0]
+        hinshi = node.feature.split(",")[0]
         if hinshi == "形状詞" or hinshi == "形容詞":
             isTrue = True
             break
@@ -54,33 +58,50 @@ def ruleBaseFactCheck(sentence):
     else :
         return "#f0e68c"#事実の場合 黄色
 
+def bert_tokenizer(text):
+    return tokenizer.encode(text, max_length=MAX_LENGTH, truncation=True, return_tensors='pt')[0]
+
 def machineLearningBaseFactCheck(sentence):
     # classifier
     answer = []
     prediction = []
-    # GPUの設定
-    device = torch.device("cpu")
 
-    with torch.no_grad():
-        # for batch in test_iter:
+    text_tensor = bert_tokenizer(sentence)
+    # numpyへ変換
+    x_numpy = text_tensor.to('cpu').detach().numpy().copy()
+    print(f'numpyへ変換:{x_numpy}')
+    # 512になるまで末尾に0を追加
+    for _ in range(512):
+        if x_numpy.size < 512:
+            x_numpy = np.append(x_numpy, 0)
+    # print(f'512になるまで末尾に0を追加:{x_numpy}')
 
-        text_tensor = sentence.Text[0].to(device)
-        # label_tensor = batch.Label.to(device)
+    #x_numpy = x_numpy.astype(np.float32)
+    x_tensor = torch.from_numpy(x_numpy).clone()
 
-        score, _ = classifier(text_tensor)
-    #     _, pred = torch.max(score, 1)
+    # print(x_tensor.shape)
+    x_tensor = x_tensor.view(1,512)
+    # print(x_tensor.shape)
+    # print(f'最終整形:{x_tensor}')
+    x_tensor = x_tensor.to(device)
+    # print(f'最終形態:{x_tensor}')
 
-    #     prediction += list(pred.cpu().numpy())
-    #     answer += list(label_tensor.cpu().numpy())
-    # print(classification_report(prediction, answer, target_names=categories))
-        print(score)
+    score, _ = classifier(x_tensor)
+    _, pred = torch.max(score, 1)
+
+    prediction += list(pred.cpu().numpy())
+    #answer += list(label_tensor.cpu().numpy())
+    # print(prediction[0])
+    return "#f0e68c" if prediction[0] else "#ff6347"
+
 
 # ニュースを文章ごとに事実か意見か分ける
 def isFactOrOpinion(text):
     ret = []
     sentence_list = text.split("。")
     for sentence in sentence_list:
-        result = ruleBaseFactCheck(sentence)
+        # result = ruleBaseFactCheck(sentence)
+        result = machineLearningBaseFactCheck(sentence)
         ans = {}
         ans["text"] = sentence
         ans["color"] = result
@@ -109,7 +130,9 @@ def newsExtraction():
     # print(str(html))
     # print(html_sub)
     result = isFactOrOpinion(html_sub)
-    return jsonify(results = list)
+    print(result)
+    print(type(result))
+    return jsonify(results = result)
 
 
 @app.route("/", methods=['GET'])

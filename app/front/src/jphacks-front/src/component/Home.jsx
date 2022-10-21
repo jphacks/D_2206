@@ -13,12 +13,10 @@ const Home = () => {
     const data = new FormData(e.target);
     const url = data.get("url");
 
-    const res = await newsApi.test();
-    const res_1 = await newsApi.entryURL({ url });
-    console.log(res.results);
-    console.log(res.results[0]);
-    console.log(res.results[1]);
+    console.log(url);
 
+    //const res = await newsApi.test();
+    const res = await newsApi.entryURL({ url });
     setResults(res.results);
     console.log(results);
   };
