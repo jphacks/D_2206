@@ -8,6 +8,9 @@ import Home from "./component/Home";
 function App() {
   const theme = createTheme({
     palette: { primary: blue },
+    background: {
+      default: "#EEEEEE",
+    },
   });
   return (
     <>
