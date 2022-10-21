@@ -3,7 +3,7 @@
 [![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2022/08/JPHACKS2022_ogp.jpg)](https://www.youtube.com/watch?v=LUPQFB4QyVo)
 
 ## 製品概要
-
+あ
 ### 背景(製品開発のきっかけ、課題等）
 
 現在ニュースのファクトチェックの必要性が叫ばれています．先日ファクトチェックを行う団体が設立されましたが，一人ひとりが目にする情報の正確性を確認する必要があります．<br>
