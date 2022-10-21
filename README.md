@@ -1,4 +1,4 @@
-# サンプル（プロダクト名）
+# 曖昧警察
 ![曖昧警察 (1)](https://user-images.githubusercontent.com/107242974/197236121-ac021ba8-b165-44a4-97e4-5a61cb4182c7.png)
 
 ## 製品概要
