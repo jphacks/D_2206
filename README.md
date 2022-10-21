@@ -1,5 +1,5 @@
 # 曖昧警察
-![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2022/08/JPHACKS2022_ogp.jpg)](https://www.youtube.com/watch?v=LUPQFB4QyVo)
+<!--![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2022/08/JPHACKS2022_ogp.jpg)](https://www.youtube.com/watch?v=LUPQFB4QyVo)-->
 ![曖昧警察 (1)](https://user-images.githubusercontent.com/107242974/197236121-ac021ba8-b165-44a4-97e4-5a61cb4182c7.png)
 
 ## 製品概要
