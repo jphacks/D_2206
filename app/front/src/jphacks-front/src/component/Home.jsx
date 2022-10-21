@@ -7,9 +7,11 @@ import newsApi from "../api/newsApi";
 const Home = () => {
   const [results, setResults] = useState([]);
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = new FormData(e.target);
     const url = data.get("url");
 
@@ -18,6 +20,7 @@ const Home = () => {
     //const res = await newsApi.test();
     const res = await newsApi.entryURL({ url });
     setResults(res.results);
+    setLoading(false);
     console.log(results);
   };
 
@@ -26,12 +29,12 @@ const Home = () => {
       <Container component="main">
         <h1> 曖昧警察だ！！！！</h1>
         <Box component="form" onSubmit={handleSubmit} maxWidth="1000">
-          <TextField sx={{ mt: 7, width: 1150 }} id="url" label="URL" name="url" value={url} onChange={(e) => setUrl(e.target.value)} required />
+          <TextField sx={{ mt: 7, width: 1150 }} id="url" label="URL" name="url" value={url} onChange={(e) => setUrl(e.target.value)} disabled={loading} required />
           <Box sx={{ mt: 3, display: "flex", justifyContent: "space-between" }}>
-            <LoadingButton sx={{ width: 200 }} type="submit" variant="outlined">
+            <LoadingButton sx={{ width: 200 }} type="submit" loading={loading} variant="outlined">
               みる！！
             </LoadingButton>
-            <LoadingButton sx={{ width: 200 }} onClick={() => setUrl("")} variant="outlined">
+            <LoadingButton sx={{ width: 200 }} onClick={() => setUrl("")} loading={loading} variant="outlined">
               clear
             </LoadingButton>
           </Box>
