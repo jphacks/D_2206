@@ -39,6 +39,8 @@ classifier.load_state_dict(torch.load(model_path, map_location=torch.device('cpu
 MAX_LENGTH = 512
 tokenizer = AutoTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 device = torch.device("cpu")
+fact_color = "#000080"
+opinion_color = "#f0e68c"
 
 
 # 文章に形容詞か形状詞があれば意見とする
@@ -54,9 +56,9 @@ def ruleBaseFactCheck(text):
             break
         node = node.next
     if isOpinion:
-        return "#ff6347"#意見の場合 トマト色
+        return opinion_color#意見の場合 トマト色
     else :
-        return "#f0e68c"#事実の場合 黄色
+        return fact_color#事実の場合 黄色
 
 def bert_tokenizer(text):
     return tokenizer.encode(text, max_length=MAX_LENGTH, truncation=True, return_tensors='pt')[0]
@@ -92,7 +94,7 @@ def machineLearningBaseFactCheck(sentence):
     prediction += list(pred.cpu().numpy())
     #answer += list(label_tensor.cpu().numpy())
     # print(prediction[0])
-    return "#f0e68c" if prediction[0] else "#ff6347"
+    return fact_color if prediction[0] else opinion_color
 
 
 # ニュースを文章ごとに事実か意見か分ける
