@@ -43,15 +43,25 @@ const Home = () => {
         <Box sx={{ mt: 3, ml: "50%" }}>結果</Box>
 
         {results.length === 0 ? (
-          <div>0やで</div>
+          <div>URLを入力してください</div>
         ) : (
+            <>
+              <Box sx={{display: "flex", justifyContent: "space-between" }}>
+                <div>
+                  青色は事実です
+                </div>
+                <div>
+                  赤色は意見です
+                </div>
+              </Box>
           <Box sx={{ mt: 5, border: 1 }}>
             <p>
               {results.map((item) => {
-                return <span style={{ color: item.color }}>{item.text}</span>;
+                return <span style={{ color: item.color }}>{item.text}<br/></span>;
               })}
             </p>
-          </Box>
+              </Box>
+              </>
         )}
       </Container>
     </>

@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
-#from bertClassfier import BertClassifier
+from bertClassfier import BertClassifier
 
 import numpy as np
 import pandas as pd
@@ -42,7 +42,7 @@ MAX_LENGTH = 512
 tokenizer = AutoTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 device = torch.device("cpu")
 fact_color = "#000080"
-opinion_color = "#f0e68c"
+opinion_color = "#ff6347"
 
 
 #classifier = BertClassifier()
@@ -111,7 +111,7 @@ def isFactOrOpinion(text):
         # result = ruleBaseFactCheck(sentence)
         result = machineLearningBaseFactCheck(sentence)
         ans = {}
-        ans["text"] = sentence
+        ans["text"] = sentence+"。"
         ans["color"] = result
         ret.append(ans)
     return ret
