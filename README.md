@@ -71,7 +71,7 @@ BERT(Hugging Face Tokenizer)
 #### ハッカソンで開発した独自機能・技術
 
 - ニュース記事一文一文に対して、事実と意見の判別を行うようにファインチューニングを行った．
-- [機械学習で事実と意見の判断をできるようにした．][https://github.com/jphacks/D_2206/blob/master/app/server/src/app.py]
+- [機械学習で事実と意見の判断をできるようにした．](https://github.com/jphacks/D_2206/blob/master/app/server/src/app.py)
 
 #### 製品に取り入れた研究内容（データ・ソフトウェアなど）（※アカデミック部門の場合のみ提出必須）
 
