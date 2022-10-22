@@ -1,6 +1,6 @@
 # 曖昧警察
 <!--![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2022/08/JPHACKS2022_ogp.jpg)](https://www.youtube.com/watch?v=LUPQFB4QyVo)-->
-![ambiguous POLICE](https://user-images.githubusercontent.com/107242974/197238730-97e890b4-4966-464b-b13b-91e017c70d8d.png)
+<!--![ambiguous POLICE](https://user-images.githubusercontent.com/107242974/197238730-97e890b4-4966-464b-b13b-91e017c70d8d.png)-->
 
 ## 実行画面
 <img width="956" alt="JPHACKS_result" src="https://user-images.githubusercontent.com/107242974/197345487-5c9d202d-0d0e-4e88-b6c1-c50953718589.png">
